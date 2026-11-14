@@ -1,0 +1,42 @@
+# Render Blueprint: two separate services so the policy key never shares a host with the agent key.
+# Create with: Render dashboard -> New -> Blueprint -> pick this repo.
+# Fill the env vars marked "sync: false" from the output of `python export_env.py`.
+services:
+  - type: web
+    name: stokvel-policy
+    runtime: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn policy_service:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - { key: PYTHON_VERSION, value: 3.12.3 }
+      - { key: POLICY_SEED, sync: false }
+      - { key: TREASURY_ADDRESS, sync: false }
+      - { key: ADMIN_TOKEN, sync: false }
+      - { key: AGENT_TOKEN, sync: false }
+      - { key: SEED_RECIPIENTS, sync: false }
+
+  - type: web
+    name: stokvel-gateway
+    runtime: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn api:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - { key: PYTHON_VERSION, value: 3.12.3 }
+      - { key: TREASURY_ADDRESS, sync: false }
+      - { key: ADMIN_TOKEN, sync: false }
+      - { key: AGENT_TOKEN, sync: false }
+      - { key: TREASURER_PIN, sync: false }
+      - { key: HUMAN_SEED, sync: false }
+      - { key: AGENT_SEED, sync: false }
+      - { key: POLICY_ADDRESS, sync: false }
+      - { key: STRANGER_ADDRESS, sync: false }
+      - { key: OBLIGATIONS_JSON, sync: false }
+      - { key: POLICY_URL, sync: false }
+      - { key: CORS_ORIGINS, sync: false }
+      - { key: AGENT_INTERVAL_SECONDS, value: "120" }  # 0 = agent only runs on demand; >0 = autonomous cycle
