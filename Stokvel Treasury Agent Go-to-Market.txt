@@ -1,0 +1,61 @@
+Stokvel Treasury Agent: Go-to-Market and Demo Script
+Node Engine Hackathon 2026 · Ripple Agentic Finance track · Draft for your team to edit. Anything in [square brackets] is something only you can fill in from real conversations.
+1. One-line pitch
+An AI treasurer that pays a stokvel's approved vendors on its own, on the XRP Ledger, inside limits it cannot change, and that the group can switch off in one click.
+2. The customer
+Who: the treasurer and committee of a community savings group with roughly 15 to 30 members: a burial society, a grocery stokvel or a rotating-savings group.
+Named pilot: [Name of a real stokvel or burial society you can reach, the treasurer's first name, and the area.] Start with groups you can visit in person around Ekurhuleni and Gauteng. Ten minutes with one real treasurer is worth more to the judges than any market statistic.
+Today's pain (confirm each point with your pilot, then keep only what they confirm):
+• Contributions and payouts are tracked on WhatsApp and in a notebook.
+• One person holds the bank access, so the whole group trusts a single individual with its money.
+• Payments are made by hand through EFT, with no automatic check against the group's own rules.
+• Members find it hard to prove afterwards who paid what, when and why.
+3. Why they would switch
+Today
+With the agent
+One treasurer can send any amount to anyone
+The agent can only pay approved vendors, up to a per-payment and a monthly cap
+Rules live in people's heads or in WhatsApp
+The rules are written into the mandate and enforced by a co-signing service and by the ledger
+A dishonest or hacked treasurer is a total loss
+The agent cannot move money alone, and the committee can revoke it in one click
+"Trust me" records
+Every payment carries a memo with a hash of the agent's reasoning, checkable on a public explorer
+Answer the CFO's four questions directly: what is it allowed to do (the mandate), who can it pay (the approved list), how do I stop it (kill switch), how do I prove what it did and why (the on-ledger memo plus the audit log).
+4. How you reach them
+1.  Pilot first: run one live month with the named stokvel on testnet money, so they see the log and the blocked attempts.
+2.  Funeral parlours and community halls: they are the payees. A vendor that gets paid on time and verifiably has a reason to recommend the tool to the groups it serves.
+3.  Stokvel associations and church or community leaders: approach them for introductions to several groups at once. [Name the specific association or leader you would contact first.]
+4.  Word of mouth between treasurers: a treasurer who can show members a clean audit trail will be asked by other groups how they did it.
+Pricing hypothesis (test it, do not state it as fact): a small monthly fee per group, or a small fee per payout. [Ask your pilot what they would pay.]
+5. Honest roadmap and limits
+Say these before the judges ask. It builds trust and it is the CFO test.
+• This MVP runs on XRPL Testnet with test XRP. Next: RLUSD, plus a local off-ramp partner so groups can hold and spend rand.
+• Member sign-in is a placeholder. Next: wallet or one-time-code login.
+• The demo kill switch uses a key held by the gateway. Production should sign with the human's own wallet (for example Xaman).
+• All officers share one treasurer PIN in this version.
+• Next on-ledger step: move large payouts to Escrow so a human must release them.
+6. Three-minute demo script
+Before you start (do this 10 minutes earlier):
+• Policy service, gateway and front end are all running. Treasurer window and a member window are open side by side.
+• The treasury shows a balance, and the agent is active.
+• Have the testnet explorer open on the treasury account.
+• Keep a screen recording of a clean run as a backup in case the network is slow.
+0:00 to 0:30, the problem. "A stokvel treasurer today holds all the power and all the risk. We built an agent that does the paying, but cannot overspend, cannot pay strangers, and can be switched off."
+0:30 to 1:00, autonomous payment. Show the agent paying the scheduled premium with nobody clicking. Open the transaction on the explorer and point at the success result and the memo. "The agent decided to pay. The memo is a fingerprint of its reasoning."
+1:00 to 1:20, blocked: wrong recipient. Try the stranger address. It is refused by the policy service, and the log shows why.
+1:20 to 1:40, blocked: too much. Send an amount over the per-payment cap. Refused.
+1:40 to 2:10, blocked by the ledger itself. Turn on the bypass option so the agent tries to skip the policy service. The XRP Ledger rejects it. "Even if the agent is compromised, the ledger will not accept it. The limit lives where the agent cannot reach."
+2:10 to 2:30, the human is in control. As treasurer, lower a cap or remove a vendor, and show the effect on the next attempt.
+2:30 to 2:50, kill switch. Press it and try a payment again. It fails on the ledger. Re-enable the agent.
+2:50 to 3:00, close. Name the pilot stokvel, say what you will do next, and say the one thing you want from Ripple.
+7. Questions to prepare for
+• Why not just a normal bank account with limits? Banks do not let a group enforce its own rules on an autonomous agent, and the ledger gives a public, tamper-proof record.
+• What if the policy service is hacked? It cannot pay alone, and it still needs the agent's signature. Both would have to be compromised together, and the human can remove either one.
+• What if the agent's AI makes a bad decision? It can only choose among approved vendors within the caps, so the worst case is bounded.
+• How do members get rand? Roadmap: RLUSD plus an off-ramp partner.
+• Who is the first paying customer? [Your pilot's name and what they said.]
+8. Before you submit
+• Read the Participant Hub for the exact submission format: video, repository, live link and deadline.
+• A Codespace sleeps when idle and its link is private, so confirm how judges will see the working product, or record the demo.
+• Make sure no file from backend/secrets or backend/data is in the repository.
